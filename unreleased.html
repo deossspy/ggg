@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unreleased / GV4MP</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            background-color: #ffffff;
+            padding: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff4081;
+            transform: scale(1.1);
+        }
+
+        main {
+            padding: 40px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Music Player Styles */
+        .player-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .album-cover {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            background: url('asdasdasdasd.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        .album-cover2 {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            background: url('album_cover.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .player-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            margin-left: 15px;
+        }
+
+        .player-controls h3 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: #333;
+        }
+
+        .audio-player {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .play-button, .pause-button {
+            background-color: #000000;
+            border: none;
+            color: #fff;
+            height: 4vh;
+            width: 4vh;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .play-button:hover, .pause-button:hover {
+            background-color: #FF4081;
+        }
+
+        /* Change play button to square when playing */
+        .play-button.active {
+            border-radius: 4px;
+        }
+
+        .progress-bar {
+            width: 70%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .progress-bar-inner {
+            width: 0%;
+            height: 100%;
+            background-color: #000000;
+            border-radius: 5px;
+        }
+
+        .volume-control {
+            width: 100px;
+        }
+
+        /* Extra Text Styles */
+        .song-info {
+            text-align: left;
+            width: 100%;
+            padding-top: 10px;
+        }
+
+        .song-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .song-info .album {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .song-info .date-recorded {
+            font-size: 0.8rem;
+            color: #444;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="home.html" >Home</a>
+        <a href="unreleased.html" style="color:  #ff4081;">Unreleased Music</a>
+        <a href="features.html">Features</a>
+        <a href="booking.html">Book a Feature</a>
+    </nav>
+
+    <main>
+        <h2>Unreleased Songs</h2>
+
+
+        <!-- Player 7 -->
+        <div class="player-container">
+            <div class="album-cover2"></div>
+            <div class="player-controls">
+                <h3>ECSTASY_LUV</h3>
+                <audio class="audio-player" id="audio-player-7" src="ECSTASY_LUV.mp3"></audio>
+
+                <div class="song-info">
+                    <p class="album">Album: EXOTIC BDAY</p>
+                    <p class="producer">Producer: deo</p>
+                    <p class="date-recorded">Date Recorded: 2024-08-06</p>
+                </div>
+
+                <div class="controls">
+                    <button class="play-button" id="play-button-7" onclick="togglePlayPause(7)">&#9658;</button>
+                    <button class="pause-button" id="pause-button-7" onclick="togglePlayPause(7)" style="display:none;">&#10074;&#10074;</button>
+                    
+                    <div class="progress-bar" id="progress-bar-7" onmousedown="startDrag(event, 7)">
+                        <div class="progress-bar-inner" id="progress-bar-inner-7"></div>
+                    </div>
+
+                    <input type="range" class="volume-control" id="volume-control-7" min="0" max="1" step="0.01" onchange="setVolume(7)" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Player 1 -->
+        <div class="player-container">
+            <div class="album-cover"></div>
+            <div class="player-controls">
+                <h3>LAY LOW</h3>
+                <audio class="audio-player" id="audio-player-1" src="LAY LOW.mp3"></audio>
+
+                <div class="song-info">
+                    <p class="album">Album: NEW ERA</p>
+                    <p class="producer">Producer: GV4MP</p>
+                    <p class="date-recorded">Date Recorded: 2024-12-30</p>
+                </div>
+
+                <div class="controls">
+                    <button class="play-button" id="play-button-1" onclick="togglePlayPause(1)">&#9658;</button>
+                    <button class="pause-button" id="pause-button-1" onclick="togglePlayPause(1)" style="display:none;">&#10074;&#10074;</button>
+                    
+                    <div class="progress-bar" id="progress-bar-1" onmousedown="startDrag(event, 1)">
+                        <div class="progress-bar-inner" id="progress-bar-inner-1"></div>
+                    </div>
+
+                    <input type="range" class="volume-control" id="volume-control-1" min="0" max="1" step="0.01" onchange="setVolume(1)" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Player 2 -->
+        <div class="player-container">
+            <div class="album-cover"></div>
+            <div class="player-controls">
+                <h3>KEEP AWAY</h3>
+                <audio class="audio-player" id="audio-player-2" src="KEEP AWAY - Copy.mp3"></audio>
+
+                <div class="song-info">
+                    <p class="album">Album: NEW ERA</p>
+                    <p class="producer">Producer: GV4MP, deo</p>
+                    <p class="date-recorded">Date Recorded: 2024-12-30</p>
+                </div>
+
+                <div class="controls">
+                    <button class="play-button" id="play-button-2" onclick="togglePlayPause(2)">&#9658;</button>
+                    <button class="pause-button" id="pause-button-2" onclick="togglePlayPause(2)" style="display:none;">&#10074;&#10074;</button>
+                    
+                    <div class="progress-bar" id="progress-bar-2" onmousedown="startDrag(event, 2)">
+                        <div class="progress-bar-inner" id="progress-bar-inner-2"></div>
+                    </div>
+
+                    <input type="range" class="volume-control" id="volume-control-2" min="0" max="1" step="0.01" onchange="setVolume(2)" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Player 3 -->
+        <div class="player-container">
+            <div class="album-cover"></div>
+            <div class="player-controls">
+                <h3>FUK IT UP</h3>
+                <audio class="audio-player" id="audio-player-3" src="4. FUK IT UP.mp3"></audio>
+
+                <div class="song-info">
+                    <p class="album">Album: NEW ERA</p>
+                    <p class="producer">Producer: deo</p>
+                    <p class="date-recorded">Date Recorded: 2024-11-17</p>
+                </div>
+
+                <div class="controls">
+                    <button class="play-button" id="play-button-3" onclick="togglePlayPause(3)">&#9658;</button>
+                    <button class="pause-button" id="pause-button-3" onclick="togglePlayPause(3)" style="display:none;">&#10074;&#10074;</button>
+                    
+                    <div class="progress-bar" id="progress-bar-3" onmousedown="startDrag(event, 3)">
+                        <div class="progress-bar-inner" id="progress-bar-inner-3"></div>
+                    </div>
+
+                    <input type="range" class="volume-control" id="volume-control-3" min="0" max="1" step="0.01" onchange="setVolume(3)" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Player 4 -->
+        <div class="player-container">
+            <div class="album-cover"></div>
+            <div class="player-controls">
+                <h3>LOCKED UP</h3>
+                <audio class="audio-player" id="audio-player-4" src="2. LOCKED UP.mp3"></audio>
+
+                <div class="song-info">
+                    <p class="album">Album: NEW ERA</p>
+                    <p class="producer">Producer: Fray, deo</p>
+                    <p class="date-recorded">Date Recorded: 2024-09-19</p>
+                </div>
+
+                <div class="controls">
+                    <button class="play-button" id="play-button-4" onclick="togglePlayPause(4)">&#9658;</button>
+                    <button class="pause-button" id="pause-button-4" onclick="togglePlayPause(4)" style="display:none;">&#10074;&#10074;</button>
+                    
+                    <div class="progress-bar" id="progress-bar-4" onmousedown="startDrag(event, 4)">
+                        <div class="progress-bar-inner" id="progress-bar-inner-4"></div>
+                    </div>
+
+                    <input type="range" class="volume-control" id="volume-control-4" min="0" max="1" step="0.01" onchange="setVolume(4)" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Player 5 -->
+        <div class="player-container">
+            <div class="album-cover"></div>
+            <div class="player-controls">
+                <h3>DYFINE</h3>
+                <audio class="audio-player" id="audio-player-5" src="6. DYFINE.mp3"></audio>
+
+                <div class="song-info">
+                    <p class="album">Album: NEW ERA</p>
+                    <p class="producer">Producer: deo</p>
+                    <p class="date-recorded">Date Recorded: 2024-11-07</p>
+                </div>
+
+                <div class="controls">
+                    <button class="play-button" id="play-button-5" onclick="togglePlayPause(5)">&#9658;</button>
+                    <button class="pause-button" id="pause-button-5" onclick="togglePlayPause(5)" style="display:none;">&#10074;&#10074;</button>
+                    
+                    <div class="progress-bar" id="progress-bar-5" onmousedown="startDrag(event, 5)">
+                        <div class="progress-bar-inner" id="progress-bar-inner-5"></div>
+                    </div>
+
+                    <input type="range" class="volume-control" id="volume-control-5" min="0" max="1" step="0.01" onchange="setVolume(5)" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Player 6 -->
+        <div class="player-container">
+            <div class="album-cover"></div>
+            <div class="player-controls">
+                <h3>POKEMON</h3>
+                <audio class="audio-player" id="audio-player-6" src="5. POKEMON.mp3"></audio>
+
+                <div class="song-info">
+                    <p class="album">Album: NEW ERA</p>
+                    <p class="producer">Producer: deo</p>
+                    <p class="date-recorded">Date Recorded: 2024-09-23</p>
+                </div>
+
+                <div class="controls">
+                    <button class="play-button" id="play-button-6" onclick="togglePlayPause(6)">&#9658;</button>
+                    <button class="pause-button" id="pause-button-6" onclick="togglePlayPause(6)" style="display:none;">&#10074;&#10074;</button>
+                    
+                    <div class="progress-bar" id="progress-bar-6" onmousedown="startDrag(event, 6)">
+                        <div class="progress-bar-inner" id="progress-bar-inner-6"></div>
+                    </div>
+
+                    <input type="range" class="volume-control" id="volume-control-6" min="0" max="1" step="0.01" onchange="setVolume(6)" />
+                </div>
+            </div>
+        </div>
+
+        
+
+        
+    </main>
+
+    
+
+    <footer>
+        <p>&copy; 2025 GV4MP, G RECORDS. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const audioPlayers = [
+            document.getElementById('audio-player-1'),
+            document.getElementById('audio-player-2'),
+            document.getElementById('audio-player-3'),
+            document.getElementById('audio-player-4'),
+            document.getElementById('audio-player-5'),
+            document.getElementById('audio-player-6'),
+            document.getElementById('audio-player-7')
+        ];
+        const playButtons = [
+            document.getElementById('play-button-1'),
+            document.getElementById('play-button-2'),
+            document.getElementById('play-button-3'),
+            document.getElementById('play-button-4'),
+            document.getElementById('play-button-5'),
+            document.getElementById('play-button-6'),
+            document.getElementById('play-button-7')
+        ];
+        const pauseButtons = [
+            document.getElementById('pause-button-1'),
+            document.getElementById('pause-button-2'),
+            document.getElementById('pause-button-3'),
+            document.getElementById('pause-button-4'),
+            document.getElementById('pause-button-5'),
+            document.getElementById('pause-button-6'),
+            document.getElementById('pause-button-7')
+        ];
+        const progressBarInners = [
+            document.getElementById('progress-bar-inner-1'),
+            document.getElementById('progress-bar-inner-2'),
+            document.getElementById('progress-bar-inner-3'),
+            document.getElementById('progress-bar-inner-4'),
+            document.getElementById('progress-bar-inner-5'),
+            document.getElementById('progress-bar-inner-6'),
+            document.getElementById('progress-bar-inner-7')
+        ];
+        const volumeControls = [
+            document.getElementById('volume-control-1'),
+            document.getElementById('volume-control-2'),
+            document.getElementById('volume-control-3'),
+            document.getElementById('volume-control-4'),
+            document.getElementById('volume-control-5'),
+            document.getElementById('volume-control-6'),
+            document.getElementById('volume-control-7')
+        ];
+
+        let isDragging = false;
+
+        // Toggle play/pause functionality for each player
+        function togglePlayPause(playerIndex) {
+            // Pause all other players
+            audioPlayers.forEach((audioPlayer, index) => {
+                if (index !== playerIndex - 1) {
+                    audioPlayer.pause();
+                    playButtons[index].style.display = 'block';
+                    pauseButtons[index].style.display = 'none';
+                    playButtons[index].classList.remove('active');
+                }
+            });
+
+            // Toggle the selected player
+            const audioPlayer = audioPlayers[playerIndex - 1];
+            const playButton = playButtons[playerIndex - 1];
+            const pauseButton = pauseButtons[playerIndex - 1];
+
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playButton.style.display = 'none';
+                pauseButton.style.display = 'block';
+                playButton.classList.add('active');
+            } else {
+                audioPlayer.pause();
+                playButton.style.display = 'block';
+                pauseButton.style.display = 'none';
+                playButton.classList.remove('active');
+            }
+        }
+
+        // Update progress bar
+        audioPlayers.forEach((audioPlayer, index) => {
+            audioPlayer.addEventListener('timeupdate', () => {
+                const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                progressBarInners[index].style.width = progress + '%';
+            });
+        });
+
+        // Adjust volume
+        function setVolume(playerIndex) {
+            audioPlayers[playerIndex - 1].volume = volumeControls[playerIndex - 1].value;
+        }
+
+        // Handle progress bar drag
+        function startDrag(event, playerIndex) {
+            isDragging = true;
+            const progressBar = document.getElementById('progress-bar-' + playerIndex);
+            const progressBarInner = document.getElementById('progress-bar-inner-' + playerIndex);
+
+            const onMouseMove = (moveEvent) => {
+                if (isDragging) {
+                    const progressBarWidth = progressBar.offsetWidth;
+                    const offsetX = moveEvent.clientX - progressBar.getBoundingClientRect().left;
+                    const percentage = Math.min(Math.max(offsetX / progressBarWidth, 0), 1);
+                    progressBarInner.style.width = percentage * 100 + '%';
+                    audioPlayers[playerIndex - 1].currentTime = percentage * audioPlayers[playerIndex - 1].duration;
+                }
+            };
+
+            const onMouseUp = () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            };
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+
+
+
+    // Disable right-click (context menu)
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    // Disable Ctrl+Shift+I and Ctrl+U
+    document.addEventListener('keydown', function(event) {
+        // Prevent Ctrl+Shift+I (DevTools)
+        if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'I') {
+            event.preventDefault();
+        }
+
+        // Prevent Ctrl+U (View Source)
+        if ((event.ctrlKey || event.metaKey) && event.key === 'u') {
+            event.preventDefault();
+        }
+    });
+
+
+
+    </script>
+
+</body>
+</html>
